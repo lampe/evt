@@ -1,0 +1,13 @@
+@booklet{MIDI,
+  author		= {MIDI Manufacturers Association},
+  TITLE			= {MIDI 1.0 Detailed Specification},
+  year 			= {1995},
+  url			= {http://madamebutterface.com/assets/documents/MIDI%201.0%20Detailed%20Specification.pdf}
+}
+@booklet{MMS,
+  author       = {Silvio Relandini},
+  TITLE        = {MIDI master and slave},
+  year         = {2001},
+  address      = {},
+  url		   = {http://upload.wikimedia.org/wikipedia/commons/5/5d/MIDI_master_and_slave.JPG},
+}
