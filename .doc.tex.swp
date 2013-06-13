@@ -97,7 +97,28 @@ Es gibt fünf "Atomic Data Types"\cite{OSCspec}. Diese sollten in jeder Open Sou
 	\item OSC-String - A sequence of non-null ASCII characters followed by a null, followed by 0-3 additional null characters to make the total number of bits a multiple of 32.
 	\item OSC-blob - An int32 size count, followed by that many 8-bit bytes of arbitrary binary data, followed by 0-3 additional zero bytes to make the total number of bits a multiple of 32.
 \end{itemize}
-Somit ist jeder Typ 
+Somit ist jeder Typ ein vielfaches von 32 bit. Ein paar beispiel:
+\newpage
+{\bf /foo , f 440}\\
+{\bf /foo , iisff 1000 -1 "hello" 1.23 4.56}
+\\
+Die Nachricht in Byte Darstellung.
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|}
+\hline
+ 2f & (/) & 66 & (f) & 6f & (o) & 6f & (o)\\ \hline
+ 0 & () & 0 & () & 0 & () & 0 & ()\\ \hline
+ 2c & (,) & 69 & (i) & 69 & (i) & 73 & (s) \\
+ 66 & (f) & 66 & (f) & 0 & () & 0 & () \\ \hline
+ 0 & () & 0 & () & 3 & () & e8 & (è) \\ \hline
+ ff & (ÿ) & ff & (ÿ) & ff & (ÿ) & ff & (ÿ) \\
+ 68 & (h) & 65 & (e) & 6c & (l) & 6c & (l) \\ \hline
+ 6f & (o) & 0 & () & 0 & () & 0 & () \\ \hline
+ 3f & (?) & 9d & () & f3 & (ó) & b6 & (¶) \\ \hline
+ 40 & (@) & b5 & (µ) & b2 & (”) & 2d & (-) \\ \hline
+\end{tabular}
+\end{table}
 \newpage
 \renewcommand{\refname}{REFERENCES}
 \bibliographystyle{plainnat}
