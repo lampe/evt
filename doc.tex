@@ -67,13 +67,15 @@ Es gibt bis heute keine Kommerziel vertriebenen Geräte die ZIPI unterstützen.
 
 \subsection{Technik}
 Einer der vorteile von Open Sound Controll ist das man dafür keine Spezielle Hardware braucht wie es z.B. bei MIDI der Fall ist. Open Sound Controll untersützt das Transmission Control Protocol kurz TCP und das User Datagram Protocol kurz UDP, die allgemein bekannt sind und z.B. im Internet oder im Heimnetzwerk schon verwendet werden. Dadurch hat Open Sound Control keine Geschwindigkeitsgrenze. Wir das Netzwerks chneller in dem Open Sound Control eingesetzt wird schneller so wird auch das Proktoll schneller verarbeitet. Durch diese Architektur könnte man Open Sound Control auch Open Stuff Control nennen da theoretisch damit alles gesteuert werden kann was eine Netzwerkschnittstelle hat.
-
+\subsubsection{OSC Packets}
+Die Nachrichten werden in so genannten OSC Packets verschickt. Eine Applikation die OSC Packete verschickt nennt man OSC-Client. Jede Applikation die OSC Packete empfängt nennt man OSC Server.
+\\
+Ein OSC Packet
 \subsubsection{Transmission Control Protocol}
 TCP ist ein verbindungsorientiertes Protokoll. Das heisst jeder Teilnehmer eines Netzwerkes kann exakt zurück verfolgt werden. Der direkte Austausch zweier Stellen ist gewährleistet und Datenverluste können behoben werden, da Daten neu angefordert werden können.
 
 \subsubsection{User Datagram Protocol}
 UDP ist ein verbindungsloses Protokoll. Heisst, Daten werden als “Stream” übertragen. Das heisst ein Sender beginnt “auf Glück” mit dem senden von Daten. Der Empfänger hat jedoch keine Möglichkeit eine Korrektur anzufordern. Der Vorteil von UDP: Es wird an alle Teilnehmer eines Netzwerkes gleichzeitig gesendet.
-\newpage
 \subsection{Syntax}
 \subsubsection{OSC-Message}
 Eine sognannte OSC Message ist aufteilt in:
@@ -97,19 +99,37 @@ Es gibt fünf "Atomic Data Types"\cite{OSCspec}. Diese sollten in jeder Open Sou
 	\item OSC-String - A sequence of non-null ASCII characters followed by a null, followed by 0-3 additional null characters to make the total number of bits a multiple of 32.
 	\item OSC-blob - An int32 size count, followed by that many 8-bit bytes of arbitrary binary data, followed by 0-3 additional zero bytes to make the total number of bits a multiple of 32.
 \end{itemize}
-Somit ist jeder Typ ein vielfaches von 32 bit. Ein paar beispiel:
-\newpage
-{\bf /foo , f 440}\\
-{\bf /foo , iisff 1000 -1 "hello" 1.23 4.56}
+Es gibt auch Type Tags die in vielen Implementierungen vorhanden sind aber nicht vom Standard gefordert werden. Hier eine kleine auswahl\cite{OSCspec}:
+\begin{itemize}
+\item c - n ascii character, sent as 32 bits
+\item r - 32 bit RGBA color
+\item m - 4 byte MIDI message. Bytes from MSB to LSB are: port id, status byte, data1, data2
+\item T - True. No bytes are allocated in the argument data.
+\item F - False. No bytes are allocated in the argument data.
+\item N - Nil. No bytes are allocated in the argument data.
+\item I - Infinitum. No bytes are allocated in the argument data.
+\item $ [ $  -Indicates the beginning of an array. The tags following are for data in the Array until a close brace tag is reached.
+\item $ ] $ - Indicates the end of an array.
+\end{itemize}
+
+Somit ist jeder Typ ein vielfaches von 32 bit. Ein paar beispiel:\\
 \\
-Die Nachricht in Byte Darstellung.
+{\bf /foo,f 440}\\
+{\bf /foo,iisff 1000 -1 "hello" 1.23 4.56}\\
+
+Wie man an den beispielen sehen kann, kann man auch mehrer Argumente in einer Nachricht übergeben. Im zweiten Beispiel sind die Argumente 1000, -1, "hell" 1.23 4.56.
+In einer Programmiersprache wie Java würde so ein eine übergabe z.B. so aussehen:\\
+\\
+{\bf foo(new Integer(1000), new Integer(-1),new String("hello"), new Float(1.23), new Float(4.56)}\\
+\\
+Die Nachricht in Byte Darstellung:
 \begin{table}[ht]
 \centering
-\begin{tabular}{|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|}
+\begin{tabular}{|p{0.5cm}|p{1.5cm}|p{0.5cm}|p{1.5cm}|p{0.5cm}|p{1.5cm}|p{0.5cm}|p{1.5cm}|}
 \hline
  2f & (/) & 66 & (f) & 6f & (o) & 6f & (o)\\ \hline
  0 & () & 0 & () & 0 & () & 0 & ()\\ \hline
- 2c & (,) & 69 & (i) & 69 & (i) & 73 & (s) \\
+ 2c & (,) & 69 & (i) & 69 & (i) & 73 & (s) \\ \hline
  66 & (f) & 66 & (f) & 0 & () & 0 & () \\ \hline
  0 & () & 0 & () & 3 & () & e8 & (è) \\ \hline
  ff & (ÿ) & ff & (ÿ) & ff & (ÿ) & ff & (ÿ) \\
@@ -119,7 +139,11 @@ Die Nachricht in Byte Darstellung.
  40 & (@) & b5 & (µ) & b2 & (”) & 2d & (-) \\ \hline
 \end{tabular}
 \end{table}
-\newpage
+\\
+An der Tabelle lässt sich gut die 32 Bit aufteilung erkennen.
+Das aligment ist wichtig für die verarbeitung in der CPU. Nur so kann man eine hohe performence erhalten die für die Realtime veraerbeitung notwendig ist.
+
+
 \renewcommand{\refname}{REFERENCES}
 \bibliographystyle{plainnat}
 \bibliography{evt}
