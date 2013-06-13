@@ -11,3 +11,10 @@
   address      = {},
   url		   = {http://upload.wikimedia.org/wikipedia/commons/5/5d/MIDI_master_and_slave.JPG},
 }
+@Booklet{OSCspec,
+ author       = {Matt Wright},
+  TITLE        = {OpenSound Control Specification},
+  year         = {2002},
+  address      = {http://archive.cnmat.berkeley.edu/OpenSoundControl/OSC-spec.html},
+  url		   = {http://archive.cnmat.berkeley.edu/OpenSoundControl/OSC-spec.html},
+}
