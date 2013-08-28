@@ -27,16 +27,16 @@
 \section{Geschichte}
 \subsection{Musical Instrument Digital Interface}
 Die Geschichte von Open Sound Control beginnt mit MIDI (Musical Instrument digital Interface).
-Also am Anfang der 1980er Große Synthesizer Manufakturen beginnen MIDI als Standard Protokoll zu Implementieren in ihre Hardware wurde dies damals als eine Revolution in der Musik Industrie angesehen. Nur mit einem Computer, einem Midi Controller und der dazugehörigen Software konnte ein Musiker aufnehmen, komponieren und mischen ohne zusätzliches Werkezug. Midi wird bis heute noch in der Musikindustrie benutzt.
-\paragraph{Wie Midi Funktioniert}
+Also am Anfang der 1980er große Synthesizer Manufakturen beginnen MIDI als Standard Protokoll zu Implementieren in ihre Hardware wurde dies damals als eine Revolution in der Musik Industrie angesehen. Nur mit einem Computer, einem MIDI Controller und der dazugehörigen Software konnte ein Musiker aufnehmen, komponieren und mischen ohne zusätzliches Werkezug. MIDI wird bis heute noch in der Musikindustrie benutzt.
+\paragraph{Wie MIDI Funktioniert}
 
-MIDI ist eine unidirektionale Schnittstelle zur seriellen Datenübertragung. Midi hat keine Datenflusskontrolle. Die Übertragungsgeschwindigkeit beträgt 31250 Bit/s. \cite{MIDI} \\
+MIDI ist eine unidirektionale Schnittstelle zur seriellen Datenübertragung. MIDI hat keine Datenflusskontrolle. Die Übertragungsgeschwindigkeit beträgt 31250 Bit/s. \cite{MIDI} \\
 \\
-Es gibt 3 verschiedene Midi Anschlüsse 
+Es gibt 3 verschiedene MIDI-Anschlüsse 
 \begin{itemize}
-  \item MIDI-IN: Hiermit empfängt der MIDI-Controller Signale
-  \item MIDI-OUT: Hiermit sendet der MIDI-Controller Signale
-  \item MIDI-THRU: Sendet die ankommenden Signale vom MIDI-IN Port einfach weiter ohne sie weiter zu verarbeiten
+  \item MIDI-IN: Hiermit empfängt der MIDI-Controller Signale.
+  \item MIDI-OUT: Hiermit sendet der MIDI-Controller Signale.
+  \item MIDI-THRU: Sendet die ankommenden Signale vom MIDI-IN Port einfach weiter ohne sie weiter zu verarbeiten.
 \end{itemize}
  \begin{figure}[htbp]
   \centering
@@ -46,26 +46,26 @@ Es gibt 3 verschiedene Midi Anschlüsse
   \caption[MIDI Master Slave \cite{MMS}]{MIDI Master Slave} 
   \label{fig:mms}
 \end{figure}
-Midi funktioniert nach einem Master-Slave-Prinzip ~\ref{fig:mms}.
-Will man mit einem Midi-Keyboard(Master) einen Synthesizer (Slave) steuern, so verbindet man die MIDI-OUT Buchse des Masters mit der MIDI-IN Buchse des Slaves. Möchte man nun noch einen zweiten Slave hinzufügen, so schließt man ein Kabel zwischen dem MIDI-THRU des ersten Slaves mit der MIDI-IN Buchse des zweiten Slaves.
+MIDI funktioniert nach einem Master-Slave-Prinzip ~\ref{fig:mms}.
+Will man mit einem MIDI-Keyboard (Master) einen Synthesizer (Slave) steuern, so verbindet man die MIDI-OUT Buchse des Masters mit der MIDI-IN Buchse des Slaves. Möchte man nun noch einen zweiten Slave hinzufügen, so schließt man ein Kabel zwischen dem MIDI-THRU des ersten Slaves mit der MIDI-IN Buchse des zweiten Slaves.
 
 \subsubsection{Nachteile von MIDI}
-MIDI hat ein paar sehr frustrierende Nachteile:
+MIDI hat ein paar Nachteile:
 \begin{itemize}
 \item Serieller Transport der Daten. Die Daten müssen erst sequenziell geordnet werden.
-  \item Langsame Übertragenes raten. Sehr problematisch bei großen Datenmengen.
+  \item Langsame Übertragungs raten. Sehr problematisch bei großen Datenmengen.
   \item Pitch wird in Integern dargestellt.
-  \item Tendiert zu Keyboard Controllern da Wind, Gittern und andere Instrumente schwer zu Implementieren sind.
-  \item Integer Repräsentation von Controller values. Dies kann zu Ungenauigkeit führen beim einstellen von feinen paramtern.
+  \item Tendiert zu Keyboard-Controllern da Wind, Gittern und andere Instrumente schwer zu Implementieren sind.
+  \item Integer-Repräsentation von Controller values. Dies kann zu Ungenauigkeit führen beim einstellen von feinen Paramtern.
   \item Ungenau Zeitauflösung. Diese wird auch wieder in Integern angegeben.
-  \item MIDI benötig Spezielle Hardware.
+  \item MIDI benötig spezielle Hardware.
 \end{itemize}
 \subsection {Zeta Instrument Processor Interface}
-1994 wurde von der Firma Zeta Instruments und einer Research Gruppe der University of California das Zeta Instrument Processor Interface (kurz ZIPI) vorgestellt. Es sollte MIDI ablösen und war auf dem OSI-Model aufgebaut. ZIPI konnte sich nie wirklich durchsetzen. MIDI hat eine Peer-to-Peer-Architektur. ZIPI baute auf eine Stern Architektur mit einem HUB in der Mitte als zentrale Anlaufsstelle. Das hatte den Vorteil, dass man einfach Geräte aus dem HUB entfernen konnte. ZIPI ist auch unabhängig von einer physikalischen Implementierung. Das alles hat aber nicht geholfen, da das Adressierungsschema zu komplex war. Es mussten 1016127 Synth zustände geregelt werden im ZIPI Controller. Zum Vergleich hatte midi nur 16 Kanäle, die zwischen 12 und 128 zuständen hatten.
+1994 wurde von der Firma Zeta Instruments und einer Research Gruppe der University of California das Zeta Instrument Processor Interface (kurz ZIPI) vorgestellt. Es sollte MIDI ablösen und war auf dem OSI-Model aufgebaut. ZIPI konnte sich nie wirklich durchsetzen. MIDI hat eine Peer-to-Peer-Architektur. ZIPI baute auf eine Stern Architektur mit einem HUB in der Mitte als zentrale Anlaufsstelle. Das hatte den Vorteil, dass man einfach Geräte aus dem HUB entfernen konnte. ZIPI ist auch unabhängig von einer physikalischen Implementierung. Das alles hat aber nicht geholfen, da das Adressierungsschema zu komplex war. Es mussten 1016127 Synth zustände geregelt werden im ZIPI Controller. Zum Vergleich hatte MIDI nur 16 Kanäle, die zwischen 12 und 128 zuständen hatten.
 Es gibt bis heute keine kommerziell vertriebenen Geräte die ZIPI unterstützen.
 \newpage
 \section{Open Sound Control}
-1997 Kündigten die ZIPI Entwickler Matt Wright und Adrian Freed das Open Sound Protokoll an was mehr bekannt ist unter dem Namen Open Sound Control ist ein gutes Beispiel von modernen Netzwerk datenübertragungs Kontrollsystemen. Wie andere Transport Protokolle erlaubt Open Sound Control es das die Kommunikation zwischen einem Computer und anderen Medien Geräten stattfinden kann, darüber hinaus ermöglicht Open Sound Control auch die Möglichkeit das Programme die auf einem Gerät laufen Daten miteinander austauschen können. Open Sound Control wurde speziell für Musiker entwickelt es kann aber auch gut in anderen Gebieten der Netzwerk basierten Kontrolle von System angewendet werden. 
+1997 kündigten die ZIPI Entwickler Matt Wright und Adrian Freed das Open Sound Protokoll an was mehr bekannt ist unter dem Namen Open Sound Control ist ein gutes Beispiel von modernen Netzwerk Datenübertragungs-Kontrollsystemen. Wie andere Transportprotokolle erlaubt Open Sound Control es das die Kommunikation zwischen einem Computer und anderen Medien Geräten stattfinden kann, darüber hinaus ermöglicht Open Sound Control auch die Möglichkeit das Programme die auf einem Gerät laufen Daten miteinander austauschen können. Open Sound Control wurde speziell für Musiker entwickelt es kann aber auch gut in anderen Gebieten der Netzwerk basierten Kontrolle von System angewendet werden. 
 
 \subsection{Technik}
 Einer der Vorteile von Open Sound Control ist, dass man dafür keine spezielle Hardware braucht, wie es z.B. bei MIDI der Fall ist. Open Sound Control unterstützt das Transmission Control Protocol kurz TCP und das User Datagram Protocol kurz UDP, die allgemein bekannt sind und z.B. im Internet oder im Heimnetzwerk schon verwendet werden. Dadurch hat Open Sound Control keine Geschwindigkeitsgrenze. Wir das Netzwerks schneller in dem Open Sound Control eingesetzt wird schneller so wird auch das proktoll schneller verarbeitet. Durch diese Architektur könnte man Open Sound Control auch Open Stuff Control nennen, da theoretisch damit alles gesteuert werden kann, was eine Netzwerkschnittstelle hat.
@@ -210,7 +210,7 @@ Eine möglicher Einsatz wäre streng mathematisch genau Gestensteuerung oder die
   \caption[TouchOSC \cite{touchosc}]{TouchOSC} 
   \label{fig:touchosc}
 \end{figure}
-TouchOSC ist eine Applikation für Apples iOS und Googles Android. Für beide Systeme kostet sie 4,99\$. Das Besondere an TouchOSC ist das es Nachrichten über Wireless LAN verschicken und Empfangen kann. Dadurch eignet sich TouchOSC besonders für Live Auftritte oder Live Shows. Ein voller Midi und Apples Logic Pro Support ist implementiert. TouchOSC ist komplett modular so kann es z.b. Als DJ pult oder als Effektgeräte oder als Drum Synthesizer genutzt werden. Frei erhältlich ist ein Editor für das Interface so kann man am Computer sein Interface erstellen und abspeichern. Damit man es zu einem Späteren Zeitpunkt wiederbenutzen kann.
+TouchOSC ist eine Applikation für Apples iOS und Googles Android. Für beide Systeme kostet sie 4,99\$. Das Besondere an TouchOSC ist das es Nachrichten über Wireless LAN verschicken und Empfangen kann. Dadurch eignet sich TouchOSC besonders für Live Auftritte oder Live Shows. Ein voller MIDI und Apples Logic Pro Support ist implementiert. TouchOSC ist komplett modular so kann es z.b. Als DJ pult oder als Effektgeräte oder als Drum Synthesizer genutzt werden. Frei erhältlich ist ein Editor für das Interface so kann man am Computer sein Interface erstellen und abspeichern. Damit man es zu einem Späteren Zeitpunkt wiederbenutzen kann.
 \newpage
 \renewcommand{\refname}{REFERENCES}
 \bibliographystyle{plainnat}
